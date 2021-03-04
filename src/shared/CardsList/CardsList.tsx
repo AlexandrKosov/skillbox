@@ -29,7 +29,7 @@ export default function CardsList (){
     const [nextAfter, setNextAfter] = useState(''); //"курсор" для курсорной пагинации 
     const bottomOfList = useRef<HTMLDivElement>(null);
     
-    const [count, setCount] = useState(0); //счетчик страниц
+    const [count, setCount] = useState(1); //счетчик страниц
     
 
     async function load(){
