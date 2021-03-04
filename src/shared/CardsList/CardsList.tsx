@@ -36,7 +36,7 @@ export default function CardsList (){
         setLoading(true);
         setErrorLoading('');
         try{
-            const {data: {data: {children, after}}} = await axios.get('https://oauth.reddit.com/rising/',{
+            const {data: {data: {after, children}}} = await axios.get('https://oauth.reddit.com/rising/',{
             //const response = await axios.get('https://oauth.reddit.com/rising/',{
                 headers: {Authorization: `bearer ${token}`},
                 params: {
@@ -44,18 +44,16 @@ export default function CardsList (){
                     after: nextAfter,
                 }
             });
-            //console.log('response:',children);
             
             setNextAfter(after);
             setPosts(prevChildren => prevChildren.concat(...children));
-            setCount(prevCount=>prevCount+1);
+            //setCount(prevCount=>prevCount+1);
 
         } catch (error){
             //console.error(error);
             setErrorLoading(String(error));
         }
         setLoading(false);
-        console.log("count:",count);
     }
 
 
@@ -65,8 +63,11 @@ export default function CardsList (){
         //-----------------
         const observer = new IntersectionObserver((entries) => {
 
-            if(count==0 || entries[0].isIntersecting && count % 3){
-                load();
+            if(entries[0].isIntersecting){
+                if( count < 3){
+                   load(); 
+                   setCount(count+1);
+                }   
             } 
         },{
             rootMargin: '10px',
@@ -82,6 +83,10 @@ export default function CardsList (){
         }
     },[bottomOfList.current, nextAfter, token]);
 
+    function loadButton() {
+        setCount(1);
+        load();
+    }
 
     // const [posts] = usePostsData();
     // let items = posts.map((post:IPostObj)=>{
@@ -108,18 +113,20 @@ export default function CardsList (){
 
             <div ref={bottomOfList} />   
 
-            {count!==0 && !(count % 3) && (
-                <div style={{textAlign: 'center'}}>
-                <button 
-                    onClick={load}
-                    style={{padding:'8px', border:'1px solid #666',background:'#CCC'}}>Загрузить ещё</button>
-            </div>
-            )}
-            {loading && (count % 3) && (
+            {loading  && (
                 <div style={{textAlign: 'center'}}>
                 Загрузка...
             </div>
+            )} 
+
+            {count==3 && !loading && (
+                <div style={{textAlign: 'center'}}>
+                    <button 
+                        onClick={loadButton}
+                        style={{padding:'8px', border:'1px solid #666',background:'#CCC'}}>Загрузить ещё</button>
+                </div>
             )}
+          
             {errorLoading && (
                 <div role="alert" style={{textAlign: 'center'}}>
                     {errorLoading}
