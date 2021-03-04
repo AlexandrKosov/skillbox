@@ -14,7 +14,7 @@ import { PostsContextProvider } from './shared/context/postsContext';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension'; 
-import { rootReducer } from './store';
+import { rootReducer, setToken } from './store';
 import thunk from 'redux-thunk';
 import { BrowserRouter, Link, Switch, Route, Redirect } from 'react-router-dom';
 import Post from './shared/Post';
@@ -38,13 +38,13 @@ function AppComponent(){
     
     const [mounted, setMounted] = useState(false);
 
-    // useEffect(()=>{
-    //     const token = localStorage.getItem('token') || window.__token__;
-    //     store dispatchEvent(setToken(token));
-    //     if(token){
-    //         localStorage.setItem('token',token);
-    //     }
-    // },[])
+    useEffect(()=>{
+        const token = localStorage.getItem('token') || window.__token__;
+       // dispatchEvent(setToken(token));
+        if(token){
+            localStorage.setItem('token',token);
+        }
+    },[])
     useEffect(()=>{
         setMounted(true);
     },[])
