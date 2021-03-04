@@ -65,6 +65,7 @@ export default function CardsList (){
 
             if(entries[0].isIntersecting){
                 if( count==0 || count%3){
+                   setCount(count+1);
                    load(); 
                 }   
             } 

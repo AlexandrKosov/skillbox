@@ -1411,6 +1411,7 @@ function CardsList() {
         var observer = new IntersectionObserver(function (entries) {
             if (entries[0].isIntersecting) {
                 if (count == 0 || count % 3) {
+                    setCount(count + 1);
                     load();
                 }
             }
@@ -1441,7 +1442,7 @@ function CardsList() {
             return react_1.default.createElement(Card_1.default, { data: post.data, key: post.data.id });
         }),
         react_1.default.createElement("div", { ref: bottomOfList }),
-        count !== 0 && (count % 3) && (react_1.default.createElement("div", { style: { textAlign: 'center' } },
+        count !== 0 && (count % 3 == 0) && (react_1.default.createElement("div", { style: { textAlign: 'center' } },
             react_1.default.createElement("button", { onClick: load, style: { padding: '8px', border: '1px solid #666', background: '#CCC' } }, "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0435\u0449\u0451"))),
         loading && (count % 3) && (react_1.default.createElement("div", { style: { textAlign: 'center' } }, "\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430...")),
         errorLoading && (react_1.default.createElement("div", { role: "alert", style: { textAlign: 'center' } }, errorLoading))));
