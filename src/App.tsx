@@ -38,13 +38,14 @@ function AppComponent(){
     
     const [mounted, setMounted] = useState(false);
 
-    useEffect(()=>{
-        const token = localStorage.getItem('token') || window.__token__;
-       // dispatchEvent(setToken(token));
-        if(token){
-            localStorage.setItem('token',token);
-        }
-    },[])
+    // useEffect(()=>{
+    //     const token = localStorage.getItem('token') || window.__token__;
+    //    // dispatchEvent(setToken(token));
+    //     if(token){
+    //         localStorage.setItem('token',token);
+    //     }
+    // },[])
+    
     useEffect(()=>{
         setMounted(true);
     },[])
