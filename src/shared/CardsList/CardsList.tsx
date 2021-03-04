@@ -116,7 +116,7 @@ export default function CardsList (){
                     style={{padding:'8px', border:'1px solid #666',background:'#CCC'}}>Загрузить ещё</button>
             </div>
             )}
-            {loading && (count % 3) && (
+            {loading && (count%3!=0) && (
                 <div style={{textAlign: 'center'}}>
                 Загрузка...
             </div>
