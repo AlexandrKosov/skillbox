@@ -29,7 +29,7 @@ export default function CardsList (){
     const [nextAfter, setNextAfter] = useState(''); //"курсор" для курсорной пагинации 
     const bottomOfList = useRef<HTMLDivElement>(null);
     
-    const [count, setCount] = useState(1); //счетчик страниц
+    const [count, setCount] = useState(0); //счетчик страниц
     
 
     async function load(){
@@ -64,9 +64,9 @@ export default function CardsList (){
         const observer = new IntersectionObserver((entries) => {
 
             if(entries[0].isIntersecting){
-                if( count==0 || count%3){
-                   setCount(count+1);
+                if( count < 3){
                    load(); 
+                   setCount(count+1);
                 }   
             } 
         },{
@@ -83,6 +83,10 @@ export default function CardsList (){
         }
     },[bottomOfList.current, nextAfter, token]);
 
+    function loadButton() {
+        setCount(1);
+        load();
+    }
 
     // const [posts] = usePostsData();
     // let items = posts.map((post:IPostObj)=>{
@@ -109,18 +113,20 @@ export default function CardsList (){
 
             <div ref={bottomOfList} />   
 
-            {count!==0 && (count%3==0) && (
-                <div style={{textAlign: 'center'}}>
-                <button 
-                    onClick={load}
-                    style={{padding:'8px', border:'1px solid #666',background:'#CCC'}}>Загрузить ещё</button>
-            </div>
-            )}
-            {loading && (count%3!=0) && (
+            {loading  && (
                 <div style={{textAlign: 'center'}}>
                 Загрузка...
             </div>
+            )} 
+
+            {count==3 && !loading && (
+                <div style={{textAlign: 'center'}}>
+                <button 
+                    onClick={loadButton}
+                    style={{padding:'8px', border:'1px solid #666',background:'#CCC'}}>Загрузить ещё</button>
+            </div>
             )}
+          
             {errorLoading && (
                 <div role="alert" style={{textAlign: 'center'}}>
                     {errorLoading}
