@@ -108,7 +108,7 @@ export default function CardsList (){
 
             <div ref={bottomOfList} />   
 
-            {count!==0 && !(count % 3) && (
+            {count!==0 && (count % 3) && (
                 <div style={{textAlign: 'center'}}>
                 <button 
                     onClick={load}
