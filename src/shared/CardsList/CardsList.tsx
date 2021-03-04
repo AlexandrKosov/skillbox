@@ -47,7 +47,7 @@ export default function CardsList (){
             
             setNextAfter(after);
             setPosts(prevChildren => prevChildren.concat(...children));
-            setCount(prevCount=>prevCount+1);
+            //setCount(prevCount=>prevCount+1);
 
         } catch (error){
             //console.error(error);
@@ -121,10 +121,10 @@ export default function CardsList (){
 
             {count==3 && !loading && (
                 <div style={{textAlign: 'center'}}>
-                <button 
-                    onClick={loadButton}
-                    style={{padding:'8px', border:'1px solid #666',background:'#CCC'}}>Загрузить ещё</button>
-            </div>
+                    <button 
+                        onClick={loadButton}
+                        style={{padding:'8px', border:'1px solid #666',background:'#CCC'}}>Загрузить ещё</button>
+                </div>
             )}
           
             {errorLoading && (
