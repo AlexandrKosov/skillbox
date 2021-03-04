@@ -4,10 +4,21 @@ import ReactDOM from 'react-dom/server';
 import {App} from '../App';
 import { indexTemplate } from './indexTemplate';
 import axios from 'axios';
+import compression from 'compression';
+import helmet from 'helmet'; //helmet рекомендуется для безопасной работы
 
 const PORT = process.env.PORT || 3000;
 
+const IS_DEV = process.env.NODE_ENV !== 'production';
+
 const app = express();
+
+if(!IS_DEV) {
+	app.use(compression());
+	app.use(helmet({
+		contentSecurityPolicy: false, //чтобы реакт запускался
+	}));
+}
 
 app.use('/static', express.static('./dist/client'));
 
@@ -32,7 +43,6 @@ app.get('/auth',(req, res)=>{
 });
 
 app.get('*',(req, res)=>{
-	console.log("^^^",process.env.CLIENT_ID, process.env.SECRET);
 	res.header("Access-Control-Allow-Origin", "*");
 	res.send(
 		indexTemplate(ReactDOM.renderToString(App()))
@@ -40,5 +50,6 @@ app.get('*',(req, res)=>{
 });
 
 app.listen(PORT, ()=>{
+	console.log("^^^",process.env.CLIENT_ID, process.env.SECRET);
 	console.log(`Server started on https://demo-redd-skillbox.herokuapp.com:${PORT}`);
 });
