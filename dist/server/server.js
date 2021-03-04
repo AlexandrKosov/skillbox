@@ -438,7 +438,8 @@ app.use('/static', express_1.default.static('./dist/client'));
 app.get('/auth', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     axios_1.default.post('https://www.reddit.com/api/v1/access_token', "grant_type=authorization_code&code=" + req.query.code + "&redirect_uri=https://demo-redd-skillbox.herokuapp.com/auth", {
-        auth: { username: 'undefined', password: process.env.SECRET },
+        //auth: {username: process.env.CLIENT_ID, password: process.env.SECRET},
+        auth: { username: "ULIpl3RaxojF1A", password: "E5U_3qVyoOX6ta942uH7lueZXiXtSQ" },
         headers: { 'Content-type': 'application/x-www-form-urlencoded' }
     })
         .then(function (_a) {
