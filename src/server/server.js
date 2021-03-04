@@ -8,7 +8,7 @@ import axios from 'axios';
 const PORT = process.env.PORT || 3000;
 
 const app = express();
-console.log("^^^",process.env.CLIENT_ID, process.env.SECRET);
+
 app.use('/static', express.static('./dist/client'));
 
 app.get('/auth',(req, res)=>{
@@ -31,6 +31,7 @@ app.get('/auth',(req, res)=>{
 });
 
 app.get('*',(req, res)=>{
+	console.log("^^^",process.env.CLIENT_ID, process.env.SECRET);
 	res.header("Access-Control-Allow-Origin", "*");
 	res.send(
 		indexTemplate(ReactDOM.renderToString(App()))

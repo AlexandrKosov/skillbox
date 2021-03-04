@@ -434,7 +434,6 @@ var indexTemplate_1 = __webpack_require__(104);
 var axios_1 = __importDefault(__webpack_require__(3));
 var PORT = process.env.PORT || 3000;
 var app = express_1.default();
-console.log("^^^", 'undefined', process.env.SECRET);
 app.use('/static', express_1.default.static('./dist/client'));
 app.get('/auth', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -449,6 +448,7 @@ app.get('/auth', function (req, res) {
         .catch(console.log);
 });
 app.get('*', function (req, res) {
+    console.log("^^^", 'undefined', process.env.SECRET);
     res.header("Access-Control-Allow-Origin", "*");
     res.send(indexTemplate_1.indexTemplate(server_1.default.renderToString(App_1.App())));
 });
