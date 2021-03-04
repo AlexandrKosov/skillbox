@@ -51,19 +51,19 @@ function AppComponent(){
 
     return (
         <Provider store={store}>
-            <UserContextProvider >
-                <PostsContextProvider>
-                    {mounted && (
-                        <BrowserRouter>
+             {mounted && (
+                <BrowserRouter>
+                    <UserContextProvider >
+                        <PostsContextProvider>
                             <Layout>
                                 <Header />
                                 <Content>
-                                    <CardsList />
+                                    
                                     <Switch>
                                         <Redirect exact from="/" to="/posts" />
                                         <Redirect from="/auth" to="/posts" />
                                         <Route path="/posts">
-                                            
+                                            <CardsList />
                                             <Route path="/posts/:id">
                                                 <Post />
                                             </Route>
@@ -76,10 +76,11 @@ function AppComponent(){
                                     </Switch>
                                 </Content>
                             </Layout>
-                        </BrowserRouter> 
-                    )}
-                </PostsContextProvider>
-            </UserContextProvider >
+                       
+                        </PostsContextProvider>
+                    </UserContextProvider >
+                </BrowserRouter> 
+             )}
         </Provider>
     );
 }
