@@ -63,8 +63,10 @@ export default function CardsList (){
         //-----------------
         const observer = new IntersectionObserver((entries) => {
 
-            if(count==0 || entries[0].isIntersecting && count % 3){
-                load();
+            if(entries[0].isIntersecting){
+                if( count==0 || count%3){
+                   load(); 
+                }   
             } 
         },{
             rootMargin: '10px',
