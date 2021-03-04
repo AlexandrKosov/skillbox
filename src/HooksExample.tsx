@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export function MyHooks({title, id}: {title: string, id?:string}) {
 
     //MEMO:
