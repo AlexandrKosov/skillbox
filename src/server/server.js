@@ -8,12 +8,12 @@ import axios from 'axios';
 const PORT = process.env.PORT || 3000;
 
 const app = express();
-
+console.log("^^^",process.env.CLIENT_ID, process.env.SECRET);
 app.use('/static', express.static('./dist/client'));
 
 app.get('/auth',(req, res)=>{
 	res.header("Access-Control-Allow-Origin", "*");
-	console.log("^^^",req.query.code, req.query.CLIENT_ID);
+	
 	axios.post(
 		'https://www.reddit.com/api/v1/access_token',		
 		`grant_type=authorization_code&code=${req.query.code}&redirect_uri=https://demo-redd-skillbox.herokuapp.com/auth`,
