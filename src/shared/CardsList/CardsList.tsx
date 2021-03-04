@@ -36,7 +36,7 @@ export default function CardsList (){
         setLoading(true);
         setErrorLoading('');
         try{
-            const {data: {data: {after, children}}} = await axios.get('https://oauth.reddit.com/rising/',{
+            const {data: {data: {children, after}}} = await axios.get('https://oauth.reddit.com/rising/',{
             //const response = await axios.get('https://oauth.reddit.com/rising/',{
                 headers: {Authorization: `bearer ${token}`},
                 params: {
