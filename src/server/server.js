@@ -25,7 +25,7 @@ app.use('/static', express.static('./dist/client'));
 
 app.get('/auth',(req, res)=>{
 	res.header("Access-Control-Allow-Origin", "*");
-	
+	console.log("ENV:",process.env);
 	axios.post(
 		'https://www.reddit.com/api/v1/access_token',		
 		`grant_type=authorization_code&code=${req.query.code}&redirect_uri=${getUrl()}/auth`,
@@ -51,6 +51,6 @@ app.get('*',(req, res)=>{
 });
 
 app.listen(PORT, ()=>{
-	console.log("^^^",process.env.CLIENT_ID, process.env.SECRET);
+	console.log("^^^",process.env,process.env.CLIENT_ID, process.env.SECRET);
 	console.log(`Server started on`, getUrl());
 });
