@@ -1,5 +1,9 @@
 import React from 'react';
 import styles from './userblock.less';
+
+import queryString from 'query-string';
+import {getUrl} from '../../../../utils/settings/serverSettings';
+
 import Break from '../../../Break';
 import Text, {EColor} from '../../../Text';
 import {AnonIcon} from '../../../Icons'; 
@@ -10,9 +14,21 @@ interface IUserBlockProps {
 }
 
 export default function UserBlock ({avatarSrc, username, loading}: IUserBlockProps){
+
+    const href = queryString.stringifyUrl({
+        url: 'https://www.reddit.com/api/v1/authorize',
+        query: {
+            "client_id": process.env.CLIENT_ID,
+            "response_type": 'code',
+            "state": 'random_string',
+            "redirect_uri": `${getUrl()}/auth`,
+            "duration": 'permanent',
+            "scope": 'read submit identity'
+        }
+    });
+
 	return (
-		<a  href="https://www.reddit.com/api/v1/authorize?client_id=ULIpl3RaxojF1A&response_type=code&
-		state=random_string&redirect_uri=https://demo-redd-skillbox.herokuapp.com/auth&duration=permanent&scope=read submit identity"
+		<a  href={href}
 			className={styles.userBox}>
 			<div className={styles.avatarBox}>
 				{avatarSrc ? <img src={avatarSrc} alt="user avatar" className={styles.avatarImage} />

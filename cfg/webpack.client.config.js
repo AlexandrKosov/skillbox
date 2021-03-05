@@ -2,7 +2,7 @@ const path = require('path');
 //const htmlWebpackPlugin = require('html-webpack-plugin');
 const { HotModuleReplacementPlugin, DefinePlugin } = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
+const {getUrl} = require( '../utils/settings/serverSettings');
 const NODE_ENV = process.env.NODE_ENV;
 const IS_DEV = NODE_ENV==='development';
 const IS_PROD = NODE_ENV==='production';
@@ -25,7 +25,7 @@ function getEntry(){
 	}
 	return [
 		path.resolve(__dirname, '../src/client/index.jsx'),
-		'webpack-hot-middleware/client?path=https://demo-redd-skillbox.herokuapp.com:3001/static/__webpack_hmr',
+		`webpack-hot-middleware/client?path=${getUrl()}/static/__webpack_hmr`,
 	]
 }
 

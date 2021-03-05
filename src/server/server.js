@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/server';
 import {App} from '../App';
 import { indexTemplate } from './indexTemplate';
 import axios from 'axios';
+import {getUrl} from '../utils/settings/serverSettings';
 import compression from 'compression';
 import helmet from 'helmet'; //helmet рекомендуется для безопасной работы
 
@@ -27,9 +28,9 @@ app.get('/auth',(req, res)=>{
 	
 	axios.post(
 		'https://www.reddit.com/api/v1/access_token',		
-		`grant_type=authorization_code&code=${req.query.code}&redirect_uri=https://demo-redd-skillbox.herokuapp.com/auth`,
+		`grant_type=authorization_code&code=${req.query.code}&redirect_uri=${getUrl()}/auth`,
 		{
-			auth: {username: process.env.CLIENT_ID, password: process.env.SECRET},
+			auth: {username: String(process.env.CLIENT_ID), password: String(process.env.SECRET)},
 			//auth: {username: "ULIpl3RaxojF1A", password: "E5U_3qVyoOX6ta942uH7lueZXiXtSQ"},
 			headers: {'Content-type': 'application/x-www-form-urlencoded'}
 		}							   
@@ -51,5 +52,5 @@ app.get('*',(req, res)=>{
 
 app.listen(PORT, ()=>{
 	console.log("^^^",process.env.CLIENT_ID, process.env.SECRET);
-	console.log(`Server started on https://demo-redd-skillbox.herokuapp.com:${PORT}`);
+	console.log(`Server started on`, getUrl());
 });
