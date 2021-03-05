@@ -1198,7 +1198,7 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nex
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nexports.getUrl = void 0;\r\nvar PROD_URL = 'https://demo-redd-skillbox.herokuapp.com';\r\nvar PORT = process.env.PORT || 3001;\r\nvar DEV_URL = process.env.DEV_URL || \"http://localhost:\" + PORT;\r\nvar IS_DEV = \"development\" !== 'production';\r\nfunction getUrl() {\r\n    return IS_DEV ? DEV_URL : PROD_URL;\r\n}\r\nexports.getUrl = getUrl;\r\n\n\n//# sourceURL=webpack:///./src/utils/settings/serverSettings.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nexports.getUrl = void 0;\r\nvar PROD_URL = 'https://demo-redd-skillbox.herokuapp.com';\r\nvar PORT = process.env.PORT || 3000;\r\nvar DEV_URL = process.env.DEV_URL || \"http://localhost:\" + PORT;\r\nvar IS_DEV = \"development\" !== 'production';\r\nfunction getUrl() {\r\n    return IS_DEV ? DEV_URL : PROD_URL;\r\n}\r\nexports.getUrl = getUrl;\r\n\n\n//# sourceURL=webpack:///./src/utils/settings/serverSettings.ts?");
 
 /***/ }),
 

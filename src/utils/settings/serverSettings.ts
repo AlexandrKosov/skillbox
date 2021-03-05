@@ -1,5 +1,5 @@
 const PROD_URL = 'https://demo-redd-skillbox.herokuapp.com';
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const DEV_URL = process.env.DEV_URL || `http://localhost:${PORT}`;
 const IS_DEV = process.env.NODE_ENV !== 'production';
 
