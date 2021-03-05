@@ -30,8 +30,8 @@ app.get('/auth',(req, res)=>{
 		'https://www.reddit.com/api/v1/access_token',		
 		`grant_type=authorization_code&code=${req.query.code}&redirect_uri=${getUrl()}/auth`,
 		{
-			auth: {username: String(process.env.CLIENT_ID), password: String(process.env.SECRET)},
-			//auth: {username: "ULIpl3RaxojF1A", password: "E5U_3qVyoOX6ta942uH7lueZXiXtSQ"},
+			//auth: {username: String(process.env.CLIENT_ID), password: String(process.env.SECRET)},
+			auth: {username: "ULIpl3RaxojF1A", password: "E5U_3qVyoOX6ta942uH7lueZXiXtSQ"},
 			headers: {'Content-type': 'application/x-www-form-urlencoded'}
 		}							   
 	)
