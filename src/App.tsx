@@ -19,6 +19,9 @@ import thunk from 'redux-thunk';
 import { BrowserRouter, Link, Switch, Route, Redirect } from 'react-router-dom';
 import Post from './shared/Post';
 //import { nanoid } from 'nanoid';
+import { StoreContext } from 'storeon/react';
+import sstore from './storeon/store';
+
 
 const store = createStore(rootReducer, composeWithDevTools(
     applyMiddleware(thunk)
@@ -54,31 +57,33 @@ function AppComponent(){
         <Provider store={store}>
             <UserContextProvider >
                 <PostsContextProvider>
-                    {mounted && (
-                        <BrowserRouter>
-                            <Layout>
-                                <Header />
-                                <Content>
-                                    <CardsList />
-                                    <Switch>
-                                        <Redirect exact from="/" to="/posts" />
-                                        <Redirect from="/auth" to="/posts" />
-                                        <Route path="/posts">
-                                            
-                                            <Route path="/posts/:id">
-                                                <Post />
+                    <StoreContext.Provider value={sstore}>
+                        {mounted && (
+                            <BrowserRouter>
+                                <Layout>
+                                    <Header />
+                                    <Content>
+                                        <CardsList />
+                                        <Switch>
+                                            <Redirect exact from="/" to="/posts" />
+                                            <Redirect from="/auth" to="/posts" />
+                                            <Route path="/posts">
+                                                
+                                                <Route path="/posts/:id">
+                                                    <Post />
+                                                </Route>
                                             </Route>
-                                        </Route>
-                                        <Route path="*">
-                                            <h1 style={{ textAlign: 'center' }}>
-                                                404 - страница не найдена
-                                            </h1>
-                                        </Route>
-                                    </Switch>
-                                </Content>
-                            </Layout>
-                        </BrowserRouter> 
-                    )}
+                                            <Route path="*">
+                                                <h1 style={{ textAlign: 'center' }}>
+                                                    404 - страница не найдена
+                                                </h1>
+                                            </Route>
+                                        </Switch>
+                                    </Content>
+                                </Layout>
+                            </BrowserRouter> 
+                        )}
+                    </StoreContext.Provider>
                 </PostsContextProvider>
             </UserContextProvider >
         </Provider>
