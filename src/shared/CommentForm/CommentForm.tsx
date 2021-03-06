@@ -23,8 +23,9 @@ export default function CommentForm (){
     }
 
     function handleChange(event: ChangeEvent<HTMLTextAreaElement>){
-        setValue(event.target.value);
+        //setValue(event.target.value);
         //setValueTouched(true);
+        dispatch('change',event.target.value);
     }
 
     function handleBlur(){
@@ -32,14 +33,16 @@ export default function CommentForm (){
     }
 
     function validateValue(){
-        if(value.length <= 3 ) return 'Нужно больше трёх символов';
+      console.log('val.comment:',comment);
+        //if(value.length <= 3 ) return 'Нужно больше трёх символов';
+        if(comment <= 3 ) return 'Нужно больше трёх символов';
         return '';
     }
     
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <textarea className={styles.input} 
-            value={value} 
+            value={comment} 
             onChange={handleChange}
             // onBlur={handleBlur}
             aria-invalid={valueError?'true':undefined}

@@ -2,9 +2,7 @@ import { createStoreon } from 'storeon';
 
 let comment = (store:any) => {
   store.on('@init', () => ({comment: "Storeon hello"}));
-  store.on('change', (comment: any) => {
-    return {comment}
-  });
+  store.on('change', (comment: any, newText: string) => ({comment: newText}));
 //   store.on('addNote', ({ notes }: any, note: any) => {
 //     return {
 //       notes: [...notes, { id: 0, item: note }],
