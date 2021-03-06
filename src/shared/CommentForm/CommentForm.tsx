@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import styles from './commentform.less';
+import { Formik, Field, Form } from 'formik';
 import { createStoreon } from 'storeon';
 //-----------------------------------------
 // // Initial state, reducers and business logic are packed in independent modules
@@ -49,8 +50,26 @@ export default function CommentForm (){
     }
     
     return (
-      <>
-      </>
+    //https://formik.org/docs/guides/validation
+    <Formik
+       initialValues={{
+         comment: '',
+       }}
+       onSubmit={values => {
+         console.log(values);
+         alert(`Отправка формы`);
+       }}
+     >
+       {({ errors, touched, isValidating }) => (
+         <Form className={styles.form}> 
+           
+           <Field name="comment" validate={validateComment} as='textarea' className={styles.input} />
+           {errors.comment && touched.comment && <div>{errors.comment}</div>}
+ 
+           <button type="submit" className={styles.button}>Комментировать</button>
+         </Form>
+       )}
+     </Formik>
     )
 
 
