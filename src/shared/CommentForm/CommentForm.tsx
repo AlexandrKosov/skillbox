@@ -4,14 +4,16 @@ import { Formik, Field, Form } from 'formik';
 import { createStoreon } from 'storeon';
 //-----------------------------------------
 // // Initial state, reducers and business logic are packed in independent modules
-// let count = store => {
-//   // Initial state
-//   store.on('@init', () => ({ count: 0 }))
-//   // Reducers returns only changed part of the state
-//   store.on('inc', ({ count }) => ({ count: count + 1 }))
-// }
+let comment = (store:any) => {
+  // Initial state
+  store.on('@init', () => ({ comment: 'Привет, Storeon!' }))
+  // Reducers returns only changed part of the state
+ // store.on('inc', ({ comments }) => ({ count: count + 1 }))
+ store.on('change', (comment: any, value: (store: any) => void)=>comment=value)
+}
 
-// export const store = createStoreon([count])
+const store = createStoreon([comment])
+console.log('store::',store, comment);
 //-----------------------------------------------------------------------------
 function validateComment(value: string) {
   let error='';

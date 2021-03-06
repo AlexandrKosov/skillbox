@@ -51,6 +51,5 @@ app.get('*',(req, res)=>{
 });
 
 app.listen(PORT, ()=>{
-	console.log("^^^",process.env,process.env.CLIENT_ID, process.env.SECRET);
 	console.log(`Server started on`, getUrl());
 });
