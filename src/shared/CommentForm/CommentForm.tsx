@@ -35,7 +35,7 @@ export default function CommentForm (){
     function validateValue(){
       console.log('val.comment:',comment);
         //if(value.length <= 3 ) return 'Нужно больше трёх символов';
-        if(comment <= 3 ) return 'Нужно больше трёх символов';
+        if(comment.length <= 3 ) return 'Нужно больше трёх символов';
         return '';
     }
     
