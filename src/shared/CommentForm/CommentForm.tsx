@@ -4,10 +4,7 @@ import { useStoreon } from 'storeon/react';
 
 export default function CommentForm (){
 
-  const { dispatch, comment } = useStoreon('comment');
-  console.log(">>",comment);
-
-    const [value, setValue] = useState('');
+    const { dispatch, comment } = useStoreon('comment');
     const [touched, setTouched] = useState(false); 
     const [valueError, setValueError] = useState('');
 
@@ -19,22 +16,14 @@ export default function CommentForm (){
         const isFormValid = !validateValue();
         if(!isFormValid) return
         
-        console.log("send:",value);
+        console.log("send:",comment);
     }
 
     function handleChange(event: ChangeEvent<HTMLTextAreaElement>){
-        //setValue(event.target.value);
-        //setValueTouched(true);
         dispatch('change',event.target.value);
     }
 
-    function handleBlur(){
-        //setValueTouched(true);
-    }
-
     function validateValue(){
-      console.log('val.comment:',comment);
-        //if(value.length <= 3 ) return 'Нужно больше трёх символов';
         if(comment.length <= 3 ) return 'Нужно больше трёх символов';
         return '';
     }
@@ -44,7 +33,6 @@ export default function CommentForm (){
             <textarea className={styles.input} 
             value={comment} 
             onChange={handleChange}
-            // onBlur={handleBlur}
             aria-invalid={valueError?'true':undefined}
             />
             {touched && validateValue() && (<div style={{color: 'red'}}>{validateValue()}</div>)}
